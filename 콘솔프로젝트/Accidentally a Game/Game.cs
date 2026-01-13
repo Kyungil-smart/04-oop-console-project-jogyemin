@@ -182,9 +182,8 @@ namespace TurnBattleGame
                     HealPlayer(40);
                     done = true;
                 }
-
-                player.ReduceCooldown();
             }
+            player.ReduceCooldown();
         }
 
 
