@@ -5,7 +5,6 @@ namespace TurnBattleGame
 
         static void Main()
         {
-
             new Game().Run();
         }
     }
