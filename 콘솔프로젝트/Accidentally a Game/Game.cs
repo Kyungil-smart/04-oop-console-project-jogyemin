@@ -3,23 +3,17 @@ using System.Threading;
 
 namespace TurnBattleGame
 {
-
     internal class Game
     {
-
         Player player = null!;
-
         Monster monster = null!;
-
+        
         bool isDefending;
-
         bool monsterHit;
-
         bool playerHit;
 
         public void Run()
         {
-
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.InputEncoding = System.Text.Encoding.UTF8;
 
@@ -34,9 +28,7 @@ namespace TurnBattleGame
 
             for (int stage = 1; stage <= 5 && player.HP > 0; stage++)
             {
-
                 player.Potion = 5;
-
                 monster = new Monster(stage);
 
                 Console.Clear();
@@ -68,6 +60,7 @@ namespace TurnBattleGame
              "                                                               ",
              "Accidentally a Game"
              };
+
 
             string[] menu =
              {
@@ -105,7 +98,7 @@ namespace TurnBattleGame
                     );
                     Console.Write(title[i]);
                 }
-
+                
                 for (int i = 0; i < menu.Length; i++)
                 {
                     Console.SetCursorPosition(
@@ -120,26 +113,21 @@ namespace TurnBattleGame
                 if (key == ConsoleKey.D2) Environment.Exit(0);
             }
         }
-
+        
         void BattleLoop()
         {
-
             while (player.HP > 0 && monster.HP > 0)
             {
-
                 PlayerTurn();
 
                 if (monster.HP <= 0) break;
-
                 MonsterTurn();
             }
         }
 
         void PlayerTurn()
         {
-
             isDefending = false;
-
             bool done = false;
 
             while (!done)
@@ -152,7 +140,6 @@ namespace TurnBattleGame
 
                 if (key == ConsoleKey.D1)
                 {
-
                     AnimateSlash();
                     Thread.Sleep(120);
 
@@ -166,7 +153,7 @@ namespace TurnBattleGame
 
                     done = true;
                 }
-
+                
                 else if (key == ConsoleKey.D2 && player.SkillCooldown == 0)
                 {
 
@@ -200,6 +187,7 @@ namespace TurnBattleGame
             }
         }
 
+
         void MonsterTurn()
         {
             playerHit = false;
@@ -227,7 +215,6 @@ namespace TurnBattleGame
 
         void AnimateSlash()
         {
-
             for (int x = Define.PLAYER_X + 4; x < Define.MONSTER_X - 4; x += 2)
             {
                 Console.Clear();
@@ -252,7 +239,6 @@ namespace TurnBattleGame
 
         void AnimateMonsterAttack()
         {
-
             for (int x = Define.MONSTER_X - 2; x > Define.PLAYER_X + 2; x -= 2)
             {
                 Console.Clear();
@@ -297,7 +283,6 @@ namespace TurnBattleGame
         {
             for (int i = 0; i < dmg; i++)
             {
-
                 if (target is Player && player.HP <= 0) break;
                 if (target is Monster && monster.HP <= 0) break;
 
@@ -370,7 +355,6 @@ namespace TurnBattleGame
 
         void DrawCharacters()
         {
-
             Console.SetCursorPosition(Define.PLAYER_X, Define.CHAR_Y - 3);
             Console.Write(playerHit ? "X " : " O "); 
             Console.SetCursorPosition(Define.PLAYER_X, Define.CHAR_Y - 2);
@@ -403,15 +387,13 @@ namespace TurnBattleGame
 
                 for (int i = 0; i < dragonArt.Length; i++)
                 {
-
                     Console.SetCursorPosition(Define.MONSTER_X, startY + i);
                     Console.Write(dragonArt[i]);
                 }
             }
-
+            
             else
             {
-
                 if (monster.Type == MonsterType.Stage1)
                 {
                     Console.SetCursorPosition(Define.MONSTER_X, Define.CHAR_Y - 3);
@@ -423,7 +405,7 @@ namespace TurnBattleGame
                     Console.SetCursorPosition(Define.MONSTER_X, Define.CHAR_Y - 1);
                     Console.Write(",, ,,");
                 }
-
+                
                 else if (monster.Type == MonsterType.Stage2)
                 {
                     Console.SetCursorPosition(Define.MONSTER_X, Define.CHAR_Y - 3);
@@ -435,7 +417,7 @@ namespace TurnBattleGame
                     Console.SetCursorPosition(Define.MONSTER_X, Define.CHAR_Y - 1);
                     Console.Write(" || ");
                 }
-
+                
                 else if (monster.Type == MonsterType.Stage3)
                 {
                     Console.SetCursorPosition(Define.MONSTER_X, Define.CHAR_Y - 3);
@@ -464,7 +446,6 @@ namespace TurnBattleGame
 
         void DrawBar(int hp, int max)
         {
-
             int bars = (hp * 10) / max;
             Console.Write("[");
 
@@ -472,7 +453,7 @@ namespace TurnBattleGame
                 Console.Write(i < bars ? "■" : " ");
             Console.Write("]");
         }
-
+        
         void DrawMenu()
         {
             Console.SetCursorPosition(0, Define.UI_Y);
