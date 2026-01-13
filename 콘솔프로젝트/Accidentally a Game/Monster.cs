@@ -14,22 +14,16 @@ namespace TurnBattleGame
 
     class Monster
     {
-
         public int HP;
-
         public int MaxHP;
-
         public bool IsBoss;
-
         public MonsterType Type;
-
+       
         int atk;
-
         Random rand = new Random();
 
         public Monster(int stage)
         {
-
             if (stage == 5)
             {
                 IsBoss = true;
@@ -78,7 +72,6 @@ namespace TurnBattleGame
 
         public int GetDamage()
         {
-
             if (IsBoss && rand.Next(0, 3) == 0)
                 return atk * 2;
 
